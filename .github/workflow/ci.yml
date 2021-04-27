@@ -1,0 +1,24 @@
+on:
+    push: 
+    branches: 
+    - main
+jobs:
+    test:
+        name: Ejemplo de prueba unitaria con Node
+        runs-on: ubuntu-latest
+        steps:
+        - uses: actions/checkout@v1
+        - uses: actions/setup-node@v1
+        - run: npm install
+        - run: npm test test.js
+        env:
+            CI: true
+    build:
+        name: Ejemplo de construcción de mi app con Node
+        runs-on: windows-latest
+        needs: test
+        steps:
+        - uses: actions/checkout@v1
+        - run: |
+            npm install
+            npm start
